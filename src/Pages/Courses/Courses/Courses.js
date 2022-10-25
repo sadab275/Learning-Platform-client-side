@@ -21,7 +21,7 @@ const Courses = () => {
                         <Card.Header>{c.heading}</Card.Header>
                         <Card.Body>
                             <Card.Title>{c.name}</Card.Title>
-                            <Card.Img variant="top" src={c.img} />
+                            <Card.Img style={{ height: '300px' }} variant="top" src={c.img} />
                             <Card.Text>
                                 {
                                     c.description.length > 150 ?
@@ -30,14 +30,14 @@ const Courses = () => {
                                         <p>{c.description}</p>
                                 }
                             </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Link to={`/details/${c.id}`} variant="primary"><Button>Go to details</Button></Link>
                         </Card.Body>
-                        <Card.Footer className="text-muted">2 days ago</Card.Footer>
+
                     </Card>)
             }
 
 
-        </div>
+        </div >
 
     );
 };
