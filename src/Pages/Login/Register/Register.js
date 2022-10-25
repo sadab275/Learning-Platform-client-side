@@ -3,30 +3,42 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const Register = () => {
+
+    const handleSubmit = event => {
+        event.preventDefault();
+    }
+
+
     return (
-        <Form className='mx-3'>
+        <Form onSubmit={handleSubmit} className='mx-3'>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Your Full Name</Form.Label>
+                <Form.Control name='name' type="name" placeholder="Enter name" />
+
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Your Photo URL</Form.Label>
+                <Form.Control name='photoURL' type="text" placeholder="Enter photoURL" />
+
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
+                <Form.Control name='email' type="email" placeholder="Enter email" required />
+
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control name='password' type="password" placeholder="Password" required />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button className='mx-3' variant="primary" type="submit">
-                Submit
-            </Button>
 
             <Button className='mx-3' variant="primary" type="submit">
-                Login with Github
+                Register
             </Button>
+
+            <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+            </Form.Text>
         </Form>
     );
 };

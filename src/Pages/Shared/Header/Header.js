@@ -67,7 +67,7 @@ const Header = () => {
                         </NavDropdown> */}
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">
+                        <Nav.Link>
                             {
                                 user?.uid ?
                                     <>
@@ -76,8 +76,8 @@ const Header = () => {
                                     </>
                                     :
                                     <>
-                                        <Button className='mx-2' to='/login'>Login</Button>
-                                        <Button to='/register'>Register</Button>
+                                        <Link to='/login'><Button className='mx-2' >Login</Button></Link>
+                                        <Link to='/register'><Button >Register</Button></Link>
                                     </>
                             }
 
