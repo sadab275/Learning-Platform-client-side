@@ -18,7 +18,7 @@ const CourseDetails = () => {
                         {
                             details.description}
                     </Card.Text>
-                    <Link to={`/details/${details.id}`} variant="primary"><Button>Go to details</Button></Link>
+                    <Link to={`/checkout/${details.id}`} variant="primary"><Button>Get Premium Access</Button></Link>
                 </Card.Body>
 
             </Card>
