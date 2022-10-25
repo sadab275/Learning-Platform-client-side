@@ -15,7 +15,7 @@ import { FaGoogle, FaUser } from 'react-icons/fa';
 
 const Header = () => {
 
-    const { providerLogin } = useContext(AuthContext);
+    const { providerLogin, logOut, user } = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -28,7 +28,13 @@ const Header = () => {
             .catch(error => console.error(error))
     }
 
-    const { user } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
+
+
     return (
         <Navbar collapseOnSelect className='mb-4' expand="lg" bg="dark" variant="dark">
             <Container>
@@ -38,10 +44,10 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Link to={`/category/:id`}>Courses</Link>
+                        <Link to={`/category/:id`}><Button>Courses</Button></Link>
                         <Nav.Link href="#pricing">FAQ</Nav.Link>
                         <Nav.Link href="#pricing">Blog</Nav.Link>
-                        <Link to='/login'>Login</Link>
+                        {/* <Link to='/login'>Login</Link> */}
                         <Button onClick={handleGoogleSignIn} className='mx-3' variant="primary" type="submit">
                             Login With <FaGoogle></FaGoogle>
                         </Button>
@@ -58,7 +64,21 @@ const Header = () => {
                         </NavDropdown> */}
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">{user?.displayName}</Nav.Link>
+                        <Nav.Link href="#deets">
+                            {
+                                user?.uid ?
+                                    <>
+                                        <span>{user?.displayName}</span>
+                                        <button onClick={handleLogOut}>Log Out</button>
+                                    </>
+                                    :
+                                    <>
+                                        <Button className='mx-2' variant='light' to='/login'>Login</Button>
+                                        <Button to='/register'>Register</Button>
+                                    </>
+                            }
+
+                        </Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
                             {user?.photoURL ?
                                 <Image
