@@ -16,10 +16,10 @@ const Category = () => {
                         <SideNav></SideNav>
                     </Col>
                     <Col >
-                        {
-                            allCourses.map(courses => <Courses key={courses.id}
-                                courses={courses}></Courses>)
-                        }
+
+                        <Courses
+                            allCourses={allCourses}></Courses>
+
 
                     </Col>
                 </Row>
