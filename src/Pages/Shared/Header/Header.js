@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../../assets/brands/logo.png'
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import Login from '../../Login/Login/Login';
-import { FaGoogle, FaUser } from 'react-icons/fa';
+import { FaGithub, FaGoogle, FaUser } from 'react-icons/fa';
 
 
 const Header = () => {
@@ -43,13 +43,16 @@ const Header = () => {
                 />{' '} <Link to='/'>Programming Courses</Link> </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
-                        <Link to={`/category/:id`}><Button>Courses</Button></Link>
-                        <Nav.Link href="#pricing">FAQ</Nav.Link>
-                        <Nav.Link href="#pricing">Blog</Nav.Link>
+                    <Nav className="me-auto ">
+                        <Link className='mx-2' to={`/category/:id`}><Button>Courses</Button></Link>
+                        <Link className='mx-2' href="#pricing"><Button>FAQ</Button> </Link>
+                        <Link className='mx-2' href="#pricing"><Button>Blog</Button></Link>
                         {/* <Link to='/login'>Login</Link> */}
                         <Button onClick={handleGoogleSignIn} className='mx-3' variant="primary" type="submit">
                             Login With <FaGoogle></FaGoogle>
+                        </Button>
+                        <Button className='mx-3' variant="primary" type="submit">
+                            Login With <FaGithub></FaGithub>
                         </Button>
                         {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -73,7 +76,7 @@ const Header = () => {
                                     </>
                                     :
                                     <>
-                                        <Button className='mx-2' variant='light' to='/login'>Login</Button>
+                                        <Button className='mx-2' to='/login'>Login</Button>
                                         <Button to='/register'>Register</Button>
                                     </>
                             }
