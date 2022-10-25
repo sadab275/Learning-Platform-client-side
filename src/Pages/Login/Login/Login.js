@@ -1,8 +1,13 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
+import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
+
+
     return (
 
         <Form className='mx-3'>
@@ -24,9 +29,7 @@ const Login = () => {
             <Button className='mx-3' variant="primary" type="submit">
                 Submit
             </Button>
-            <Button className='mx-3' variant="primary" type="submit">
-                Login With Google
-            </Button>
+
             <Button className='mx-3' variant="primary" type="submit">
                 Login with Github
             </Button>

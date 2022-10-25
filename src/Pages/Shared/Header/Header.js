@@ -1,5 +1,7 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
 import { useContext } from 'react';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,8 +10,24 @@ import { Link } from 'react-router-dom';
 import logo from '../../../assets/brands/logo.png'
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import Login from '../../Login/Login/Login';
+import { FaGoogle, FaUser } from 'react-icons/fa';
+
 
 const Header = () => {
+
+    const { providerLogin } = useContext(AuthContext);
+
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
+
     const { user } = useContext(AuthContext);
     return (
         <Navbar collapseOnSelect className='mb-4' expand="lg" bg="dark" variant="dark">
@@ -24,6 +42,9 @@ const Header = () => {
                         <Nav.Link href="#pricing">FAQ</Nav.Link>
                         <Nav.Link href="#pricing">Blog</Nav.Link>
                         <Link to='/login'>Login</Link>
+                        <Button onClick={handleGoogleSignIn} className='mx-3' variant="primary" type="submit">
+                            Login With <FaGoogle></FaGoogle>
+                        </Button>
                         {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
@@ -39,7 +60,13 @@ const Header = () => {
                     <Nav>
                         <Nav.Link href="#deets">{user?.displayName}</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
+                            {user?.photoURL ?
+                                <Image
+                                    style={{ height: '30px' }} roundedCircle
+                                    src={user?.photoURL}></Image>
+                                :
+                                <FaUser></FaUser>
+                            }
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
