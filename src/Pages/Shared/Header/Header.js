@@ -60,7 +60,7 @@ const Header = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto ">
                         <Link className='mx-2' to={`/category/:id`}><Button>Courses</Button></Link>
-                        <Link className='mx-2' href="#pricing"><Button>FAQ</Button> </Link>
+                        <Link className='mx-2' to={`/faq`}><Button>FAQ</Button> </Link>
                         <Link className='mx-2' to={`/blog`}><Button>Blog</Button></Link>
                         {/* <Link to='/login'>Login</Link> */}
                         <Button onClick={handleGoogleSignIn} className='mx-3' variant="primary" type="submit">
