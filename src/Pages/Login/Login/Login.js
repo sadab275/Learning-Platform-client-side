@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
@@ -12,6 +12,9 @@ const Login = () => {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const { signIn } = useContext(AuthContext);
 
@@ -27,7 +30,8 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 setError('');
-                navigate('/category/:id')
+                navigate(from, { replace: true });
+                // '/category/:id'?
             })
             .catch(error => {
                 console.error(error);
@@ -53,6 +57,7 @@ const Login = () => {
             <Button className='mx-3' variant="primary" type="submit">
                 Login
             </Button>
+            <p>Already a user? <Link to='/register'><span>Visit Register</span></Link> </p>
             <Form.Text className="text-danger">
                 {error}
             </Form.Text>
