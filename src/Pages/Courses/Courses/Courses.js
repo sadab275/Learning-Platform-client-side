@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Courses = () => {
     const [cor, setCor] = useState([]);
-    fetch('http://localhost:5000/courses-categories')
+    fetch('https://programming-courses-server.vercel.app/courses-categories')
         .then(res => res.json())
         .then(data => setCor(data));
 
