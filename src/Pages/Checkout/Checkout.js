@@ -9,8 +9,9 @@ const Checkout = () => {
     return (
         <div className='container'>
             <h2>Welcome to the checkout page. </h2>
-            <h1>You can now access to our course name : {out.name}</h1>
+            <h1>You can now access to our course name : {out.name}, Course Id: {out.id}</h1>
             <p>Thanks for enrolling this course- <h3>{user?.displayName}</h3></p>
+            <p>Email: {user?.email}</p>
         </div>
     );
 };
