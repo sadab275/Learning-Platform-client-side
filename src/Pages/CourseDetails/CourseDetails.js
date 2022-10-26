@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useLoaderData } from 'react-router-dom';
 
+
 const CourseDetails = () => {
     const details = useLoaderData();
     console.log(details);
