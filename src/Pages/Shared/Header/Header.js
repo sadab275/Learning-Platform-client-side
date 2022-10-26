@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React from 'react';
 import { useContext } from 'react';
 import { Button, Image } from 'react-bootstrap';
@@ -15,9 +15,10 @@ import { FaGithub, FaGoogle, FaUser } from 'react-icons/fa';
 
 const Header = () => {
 
-    const { providerLogin, logOut, user } = useContext(AuthContext);
+    const { providerLogin, logOut, user, gitLogin } = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider();
+    const gitProvider = new GithubAuthProvider();
 
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
@@ -26,6 +27,18 @@ const Header = () => {
                 console.log(user);
             })
             .catch(error => console.error(error))
+    }
+
+    const handleGithubSignIn = () => {
+        gitLogin(gitProvider)
+            .then(result => {
+                const user = result.user;
+
+                console.log(user);
+            })
+            .catch(error => {
+                console.error('error:', error)
+            })
     }
 
     const handleLogOut = () => {
@@ -51,7 +64,7 @@ const Header = () => {
                         <Button onClick={handleGoogleSignIn} className='mx-3' variant="primary" type="submit">
                             Login With <FaGoogle></FaGoogle>
                         </Button>
-                        <Button className='mx-3' variant="primary" type="submit">
+                        <Button onClick={handleGithubSignIn} className='mx-3' variant="primary" type="submit">
                             Login With <FaGithub></FaGithub>
                         </Button>
                         {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
