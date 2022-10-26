@@ -11,6 +11,9 @@ import logo from '../../../assets/brands/logo.png'
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import Login from '../../Login/Login/Login';
 import { FaGithub, FaGoogle, FaUser } from 'react-icons/fa';
+import "./Header.css";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { Tooltip } from 'react-bootstrap';
 
 
 const Header = () => {
@@ -33,7 +36,6 @@ const Header = () => {
         gitLogin(gitProvider)
             .then(result => {
                 const user = result.user;
-
                 console.log(user);
             })
             .catch(error => {
@@ -84,7 +86,7 @@ const Header = () => {
                             {
                                 user?.uid ?
                                     <>
-                                        <span>{user?.displayName}</span>
+                                        {/* <span className='username'>{user?.displayName}</span> */}
                                         <button onClick={handleLogOut}>Log Out</button>
                                     </>
                                     :
@@ -95,15 +97,32 @@ const Header = () => {
                             }
 
                         </Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            {user?.photoURL ?
-                                <Image
-                                    style={{ height: '30px' }} roundedCircle
-                                    src={user?.photoURL}></Image>
-                                :
-                                <FaUser></FaUser>
-                            }
-                        </Nav.Link>
+                        {['left'].map((placement) => (
+                            <OverlayTrigger
+                                key={placement}
+                                placement={placement}
+                                overlay={
+                                    user?.photoURL ?
+
+                                        <Tooltip id={`tooltip-${placement}`}>
+                                            <span>{user?.displayName}</span>.
+                                        </Tooltip> :
+                                        <></>
+
+                                }
+                            >
+                                <Link className='mx-2' style={{ textDecoration: 'none' }} eventKey={2} to={`/`}>
+                                    {
+
+                                        user?.photoURL ?
+                                            <Image style={{ height: '30px' }} roundedCircle src={user?.photoURL}></Image>
+                                            : <FaUser></FaUser>
+
+                                    }
+
+                                </Link>
+                            </OverlayTrigger>
+                        ))}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
